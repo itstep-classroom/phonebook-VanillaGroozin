@@ -19,6 +19,7 @@ int x = 1;
 void load() {
 	ifstream fin(bookname);
 	fin >> n;
+	if (fin.is_open()) {
 		if (m != 0) delete[] book;
 
 		m = n + x;
@@ -31,8 +32,14 @@ void load() {
 		cout << bookname << " loaded\n" << endl << "-------------------\n";
 		loaded = true;
 
-	fin.close();
-	cout << endl;
+		fin.close();
+		cout << endl;
+	}
+	else {
+		cout << bookname << " doesn't exist\n" << endl << "-------------------\n";
+		fin.close();
+		cout << endl;
+	}
 }
 
 void save() {
@@ -173,7 +180,7 @@ void update() {
 	cin >> book[x-1].phone;
 	saved = false;
 }
-void add() {
+void add() {	
 	add:
 	char YN;
 	if (loaded == false) {
@@ -222,7 +229,7 @@ int main() {
 		cout << "-remove" << endl;
 		cout << "-exit" << endl;
 		cout << "-------------------\n";
-		started == true;
+		started = true;
 	}
 	cout << "\nEnter your command: ";
 
@@ -278,8 +285,6 @@ int main() {
 		if (strcmp(com, "add") == 0) {
 			add();
 		}
-
 		cout << "\nEnter your command: ";
 	}
-
 }
